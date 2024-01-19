@@ -1,0 +1,23 @@
+{
+  "name": "dirmanager",
+  "module": "dist/src/index.js",
+  "type": "module",
+  "bin": {
+    "dirmanager": "./dist/src/index.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@biomejs/biome": "^1.5.2",
+    "@types/figlet": "^1.5.8",
+    "commander": "^11.1.0",
+    "figlet": "^1.7.0"
+  },
+  "scripts": {
+    "build": "rm -rf dist && bun build . --target bun --outdir dist"
+  }
+}
