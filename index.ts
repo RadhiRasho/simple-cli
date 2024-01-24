@@ -60,8 +60,8 @@ if (options.ls) {
 	listDirContents(filepath);
 }
 if (options.mkdir) {
-	createDir(path.resolve(import.meta.dir, options.mkdir));
+	createDir(path.resolve(path.dirname("./"), options.mkdir));
 }
 if (options.touch) {
-	createFile(path.resolve(import.meta.dir, options.touch));
+	createFile(path.resolve(path.dirname("./"), options.touch));
 }
