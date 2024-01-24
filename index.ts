@@ -21,13 +21,17 @@ const options = program.opts();
 
 async function listDirContents(filepath: string) {
 	try {
-		const files = await readdir(filepath, { recursive: true });
+		const files = await readdir(filepath);
 		const promises = files.map(async (file: string) => {
 			const route = path.resolve(filepath, file);
 
 			const { size, birthtime } = await stat(route);
 
-			return { "File Name": file, "Size (KB)": size, "Created At": birthtime };
+			return {
+				"File Name": file,
+				"Size (MB)": size / 1000,
+				"Created At": birthtime,
+			};
 		});
 
 		const detailedFiles = await Promise.all(promises);
@@ -52,7 +56,7 @@ async function createFile(filepath: string) {
 
 if (options.ls) {
 	const filepath =
-		typeof options.ls === "string" ? options.ls : import.meta.dir;
+		typeof options.ls === "string" ? options.ls : path.dirname("./");
 	listDirContents(filepath);
 }
 if (options.mkdir) {

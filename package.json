@@ -2,9 +2,6 @@
   "name": "dirmanager",
   "module": "dist/src/index.js",
   "type": "module",
-  "bin": {
-    "dirmanager": "./dist/src/index.js"
-  },
   "devDependencies": {
     "@types/bun": "latest"
   },
