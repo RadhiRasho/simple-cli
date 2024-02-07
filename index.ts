@@ -1,9 +1,6 @@
-#! /usr/bin/env node
-
 import { Command } from "commander";
 import figlet from "figlet";
-
-import { readdir, mkdir, exists, stat, open } from "node:fs/promises";
+import { readdir, mkdir, stat, open } from "node:fs/promises";
 import path from "node:path";
 
 const program = new Command();
@@ -43,8 +40,15 @@ async function listDirContents(filepath: string) {
 }
 
 async function createDir(filepath: string) {
-	const exits = await exists(filepath);
-	if (!exits) {
+	let exists = false;
+	try {
+		const stats = await stat(filepath);
+		exists = stats.isDirectory();
+	} catch (error) {
+		exists = false;
+	}
+
+	if (!exists) {
 		await mkdir(filepath);
 		console.log("The directory has been created successfully 🔥");
 	} else console.error("The directory already exists 🙅‍♂️");
